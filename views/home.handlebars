@@ -9,16 +9,8 @@
 
 <script src="//cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
 
-<script>riot.mount('*', { articles: [
-		{
-			header: "Dorem sispum",
-			content: "Lorem ipsum",
-			id: 1
-		},
-		{
-			header: "Dorem sispum",
-			content: "Lorem ipsum",
-			id: 1
-		}]
-	})
+<script>
+$.get('/article').done(function(articles) {
+	riot.mount('articles', { articles: articles })
+}).error(console.error)
 </script>

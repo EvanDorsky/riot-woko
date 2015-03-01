@@ -7,9 +7,8 @@
 
 	// logic
 
-	this.header = "Dorem sispum"
-	this.content = "Lorem ipsum"
-	this.id = 1
+	this.header = opts.header || "Dorem sispum"
+	this.content = opts.content || "Lorem ipsum"
 	
 	edit(e) {
 		$.ajax({

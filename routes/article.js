@@ -1,15 +1,23 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var Article = require('../models/article');
+var handleErr = require('../utils/utils').handleErr;
 
 var router = express.Router();
 
-// get an article
+// get all articles
 router.get('/', function(req, res) {
-	console.log('HIIIIIIIIIIIIII');
-	res.json({
-		gotit: true
+	Article.find(function(err, articles) {
+		if (err)
+			return handleErr(err, 'article:12');
+
+		res.json(articles);
 	});
+});
+
+// get an article by id
+router.get('/:id', function(req, res) {
+	res.end();
 });
 
 // edit an article
@@ -28,11 +36,9 @@ router.post('/', function(req, res) {
 
 	new Article(req.body).save(function(err) {
 		if (err)
-			return console.error('Error:', err);
-	});
+			return handleErr(err, 'article:33');
 
-	res.json({
-		gotit: true
+		res.json(req.body);
 	});
 });
 

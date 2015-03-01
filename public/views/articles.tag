@@ -1,5 +1,4 @@
 <articles>
-
 	<button onclick={ new }>New Article</button>
 
 	<article each={ opts.articles }/>
@@ -12,8 +11,9 @@
 				content: 'This content'
 			},
 			url: '/article'
-		}).done(function(data) {
-			console.log(data.success)
+		}).done(function(article) {
+			$('body').append('<article></article>')
+			riot.mount('article', article)
 		})
 	}
 </articles>
