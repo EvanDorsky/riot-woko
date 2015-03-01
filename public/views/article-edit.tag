@@ -1,9 +1,11 @@
 <article>
-	<h2>{ this.header }</h2>
+	<form onsubmit={ submit }>
+		<input name="header">{ this.header || '' }</input>
 
-	<div class="content">{ this.content }</div>
+		<form name="content">{ this.content || '' }</input>
 
-	<button onclick={ edit }>Edit</button>
+		<input type="submit">Done</input>
+	</form>
 
 	// logic
 
@@ -11,7 +13,7 @@
 	this.content = "Lorem ipsum"
 	this.id = 1
 	
-	edit(e) {
+	submit(e) {
 		$.ajax({
 			type: 'PUT',
 			data: {

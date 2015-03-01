@@ -4,6 +4,7 @@ var path = require('path');
 
 // routes
 var index = require('./routes/index');
+var article = require('./routes/article');
 
 var mongoose = require('mongoose');
 var logger = require('morgan');
@@ -32,9 +33,10 @@ var db = mongoose.connection;
 db.on('error', console.error);
 
 var MONGO = process.env.MONGOURI_WIKI || 'mongodb://localhost/test';
-// mongoose.connect(MONGO);
+mongoose.connect(MONGO);
 
 // routes
 app.get('/', index.home);
+app.use('/article', article);
 
 app.listen(process.env.PORT || 3000);
