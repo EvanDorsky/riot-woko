@@ -1,7 +1,24 @@
-<counter></counter>
+<h1>Woko</h1>
 
-<script src="/views/counter-tag.tag" type="riot/tag"></script>
+<articles/>
+
+<!-- Includes -->
+
+<script src="/views/articles.tag" type="riot/tag"></script>
+<script src="/views/article.tag" type="riot/tag"></script>
 
 <script src="//cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
 
-<script>riot.mount('*')</script>
+<script>riot.mount('*', { articles: [
+		{
+			header: "Dorem sispum",
+			content: "Lorem ipsum",
+			id: 1
+		},
+		{
+			header: "Dorem sispum",
+			content: "Lorem ipsum",
+			id: 1
+		}]
+	})
+</script>
