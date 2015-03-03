@@ -5,7 +5,8 @@
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
 		<input name="header" onkeyup={ input }>
-		<input name="content" onkeyup={ input }>
+		<br>
+		<textarea name="content" onkeyup={ input } />
 		<input type="submit">
 	</form>
 
@@ -13,12 +14,13 @@
 
 	// logic
 	var article = this
-	this.editMode = false
+	article.editMode = false
 
 	// created from the new button
 	if (opts) {
-		this.header = opts.header
-		this.content = opts.content
+		article._id = opts._id
+		article.header = opts.header
+		article.content = opts.content
 	}
 
 	article.new = {}
@@ -28,19 +30,17 @@
 	}
 
 	toggleEdit(e) {
-		this.editMode = !this.editMode
+		article.editMode = !article.editMode
 	}
 
 	edit(e) {
-		console.log("bodget")
 		$.ajax({
 			type: 'PUT',
 			data: {
-				_id: article._id,
 				header: article.new.header,
 				content: article.new.content
 			},
-			url: '/article'
+			url: '/article/'+article._id
 		}).done(function(newArticle) {
 			article.header = newArticle.header
 			article.content = newArticle.content

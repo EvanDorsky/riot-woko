@@ -21,8 +21,11 @@ router.get('/:id', function(req, res) {
 });
 
 // edit an article
-router.put('/', function(req, res) {
-	Article.update({ _id: req.body._id }, req.body, function(err) {
+router.put('/:id', function(req, res) {
+	Article.update({ _id: req.params.id }, req.body, function(err) {
+		if (err)
+			return handleErr(err, 'article:27');
+
 		res.json(req.body);
 	})
 });
@@ -31,11 +34,11 @@ router.put('/', function(req, res) {
 router.post('/', function(req, res) {
 	req.body.created = new Date();
 
-	new Article(req.body).save(function(err) {
+	new Article(req.body).save(function(err, article) {
 		if (err)
 			return handleErr(err, 'article:33');
 
-		res.json(req.body);
+		res.json(article);
 	});
 });
 
