@@ -7,7 +7,7 @@ var router = express.Router();
 
 // get all articles
 router.get('/', function(req, res) {
-	Article.find(function(err, articles) {
+	Article.find().sort({ created: -1 }).exec(function(err, articles) {
 		if (err)
 			return handleErr(err, 'article:12');
 

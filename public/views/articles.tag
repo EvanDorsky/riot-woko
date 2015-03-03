@@ -1,13 +1,14 @@
 <articles>
-	<form onsubmit={ new }>
-		<input name="header" onkeyup={ input }>
-
-		<input name="content" onkeyup={ input }>
-
+	<form id="new-article" onsubmit={ new }>
+		<input class="text" name="header" onkeyup={ input }>
+		<br>
+		<textarea class="text" name="content" onkeyup={ input }/>
 		<input type="submit" value="New Article">
 	</form>
 
-	<article each={ opts.articles }/>
+	<div id="article-list">
+		<article each={ opts.articles }/>
+	</div>
 
 	// logic
 	var editor = this
@@ -24,8 +25,10 @@
 			data: editor.new,
 			url: '/article'
 		}).done(function(article) {
-			$('body').append('<article></article>')
+			$('#article-list').prepend('<article></article>')
 			riot.mount('article', article)
+
+			$('#new-article .text').val('')
 		})
 	}
 </articles>

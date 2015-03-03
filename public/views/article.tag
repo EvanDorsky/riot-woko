@@ -9,10 +9,11 @@
 		<input type="submit">
 	</form>
 
-	<button onclick={ edit }>Edit</button>
+	<button onclick={ toggleEdit }>Edit</button>
 
 	// logic
 	var article = this
+	this.editMode = false
 
 	// created from the new button
 	if (opts) {
@@ -20,19 +21,31 @@
 		this.content = opts.content
 	}
 
+	article.new = {}
+
+	input(e) {
+		article.new[e.target.name] = e.target.value
+	}
+
+	toggleEdit(e) {
+		this.editMode = !this.editMode
+	}
+
 	edit(e) {
+		console.log("bodget")
 		$.ajax({
 			type: 'PUT',
 			data: {
 				_id: article._id,
-				header: 'bogooooo',
-				content: 'dsafsdfa'
+				header: article.new.header,
+				content: article.new.content
 			},
 			url: '/article'
 		}).done(function(newArticle) {
 			article.header = newArticle.header
 			article.content = newArticle.content
+			article.toggleEdit(e)
 			article.update()
-		});
+		}).error(console.error)
 	}
 </article>
