@@ -22,12 +22,9 @@ router.get('/:id', function(req, res) {
 
 // edit an article
 router.put('/', function(req, res) {
-	var newArticle = req.body;
-
-	Article.update()
-	res.json({
-		gotit: true
-	});
+	Article.update({ _id: req.body._id }, req.body, function(err) {
+		res.json(req.body);
+	})
 });
 
 // make a new article
@@ -43,13 +40,13 @@ router.post('/', function(req, res) {
 });
 
 // delete an article by id
-router.delete('/', function(req, res) {
-	var newArticle = req.body;
+router.delete('/:id', function(req, res) {
+	Article.removeById(req.body._id, function(err) {
+		if (err)
+			return handleErr(err, 'article:46')
 
-	// Article.update()
-	res.json({
-		gotit: true
-	});
+		res.json({ success: true });
+	})
 });
 
 module.exports = router;

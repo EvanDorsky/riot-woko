@@ -1,28 +1,34 @@
-<article>
-	<form onsubmit={ submit }>
-		<input name="header">{ this.header || '' }</input>
+<article-edit>
+	<form onsubmit={ edit }>
+		<input name="header" onkeyup={ input }>
 
-		<form name="content">{ this.content || '' }</input>
+		<input name="content" onkeyup={ input }>
 
-		<input type="submit">Done</input>
+		<input type="submit">
 	</form>
 
 	// logic
+	var editor = this
 
-	this.header = "Dorem sispum"
-	this.content = "Lorem ipsum"
-	this.id = 1
-	
-	submit(e) {
+	editor.new = {}
+
+	input(e) {
+		editor.new[e.target.name] = e.target.value
+	}
+
+	edit(e) {
+		console.log("editor.new")
+		console.log(editor.new)
 		$.ajax({
 			type: 'PUT',
 			data: {
-				header: 'new',
-				content: 'now'
+				header: editor.new.header,
+				content: editor.new.content
 			},
 			url: '/article'
-		}).done(function(data) {
-			alert(data.gotit);
+		}).done(function(newArticle) {
+			$('body').append('<article></article>')
+			riot.mount('article', newArticle)
 		});
 	}
-</article>
+</article-edit>

@@ -6,11 +6,12 @@
 
 <script src="/views/articles.tag" type="riot/tag"></script>
 <script src="/views/article.tag" type="riot/tag"></script>
+<script src="/views/article-edit.tag" type="riot/tag"></script>
 
 <script src="//cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
 
 <script>
 $.get('/article').done(function(articles) {
-	riot.mount('articles', { articles: articles })
+	riot.mount('*', { articles: articles })
 }).error(console.error)
 </script>
