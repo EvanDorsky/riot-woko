@@ -11,7 +11,7 @@
 	</div>
 
 	// logic
-	var articles = this
+	var articleList = this
 
 	new(e) {
 		$.ajax({
@@ -22,11 +22,10 @@
 			},
 			url: '/article'
 		}).done(function(article) {
-			$('#article-list').prepend('<article></article>')
-			riot.mount('article', article)
+			opts.articles.unshift(article)
 
 			$('#new-article .text').val('')
-			articles.update()
+			articleList.update()
 		})
 	}
 </articles>
