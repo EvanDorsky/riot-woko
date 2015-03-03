@@ -4,9 +4,9 @@
 		<div class="content">{ this.content }</div>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
-		<input name="header" onkeyup={ input }>
+		<input name="header" value={ this.header }>
 		<br>
-		<textarea name="content" onkeyup={ input } />
+		<textarea name="content" value={ this.content }/>
 		<input type="submit">
 	</form>
 
@@ -24,12 +24,6 @@
 		article.content = opts.content
 	}
 
-	article.new = {}
-
-	input(e) {
-		article.new[e.target.name] = e.target.value
-	}
-
 	toggleEdit(e) {
 		article.editMode = !article.editMode
 	}
@@ -38,8 +32,8 @@
 		$.ajax({
 			type: 'PUT',
 			data: {
-				header: article.new.header,
-				content: article.new.content
+				header: $(e.target).find('[name=header]').val(),
+				content: $(e.target).find('[name=content]').val()
 			},
 			url: '/article/'+article._id
 		}).done(function(newArticle) {

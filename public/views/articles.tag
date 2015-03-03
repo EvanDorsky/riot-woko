@@ -1,8 +1,8 @@
 <articles>
 	<form id="new-article" onsubmit={ new }>
-		<input class="text" name="header" onkeyup={ input }>
+		<input class="text" name="header">
 		<br>
-		<textarea class="text" name="content" onkeyup={ input }/>
+		<textarea class="text" name="content"/>
 		<input type="submit" value="New Article">
 	</form>
 
@@ -11,27 +11,22 @@
 	</div>
 
 	// logic
-	var editor = this
-
-	editor.newInfo = {}
-
-	// this causes update of articles which causes bad data
-	input(e) {
-		editor.newInfo[e.target.name] = e.target.value
-	}
+	var articles = this
 
 	new(e) {
 		$.ajax({
 			type: 'POST',
-			data: editor.newInfo,
+			data: {
+				header: $(e.target).find('[name=header]').val(),
+				content: $(e.target).find('[name=content]').val()
+			},
 			url: '/article'
 		}).done(function(article) {
 			$('#article-list').prepend('<article></article>')
 			riot.mount('article', article)
 
-			editor.newInfo = {}
 			$('#new-article .text').val('')
-			riot.update()
+			articles.update()
 		})
 	}
 </articles>
