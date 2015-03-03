@@ -11,6 +11,7 @@
 	</form>
 
 	<button onclick={ toggleEdit }>Edit</button>
+	<button onclick={ delete }>Delete</button>
 
 	// logic
 	var article = this
@@ -45,7 +46,20 @@
 			article.header = newArticle.header
 			article.content = newArticle.content
 			article.toggleEdit(e)
+			
+			article.new = {}
 			article.update()
+		}).error(console.error)
+	}
+
+	delete(e) {
+		$.ajax({
+			type: 'DELETE',
+			url: '/article/'+article._id
+		}).done(function(res) {
+			if (!res.success)
+				return console.error('Failure')
+			article.unmount()
 		}).error(console.error)
 	}
 </article>

@@ -13,22 +13,25 @@
 	// logic
 	var editor = this
 
-	editor.new = {}
+	editor.newInfo = {}
 
+	// this causes update of articles which causes bad data
 	input(e) {
-		editor.new[e.target.name] = e.target.value
+		editor.newInfo[e.target.name] = e.target.value
 	}
 
 	new(e) {
 		$.ajax({
 			type: 'POST',
-			data: editor.new,
+			data: editor.newInfo,
 			url: '/article'
 		}).done(function(article) {
 			$('#article-list').prepend('<article></article>')
 			riot.mount('article', article)
 
+			editor.newInfo = {}
 			$('#new-article .text').val('')
+			riot.update()
 		})
 	}
 </articles>

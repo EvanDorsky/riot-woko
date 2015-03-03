@@ -44,7 +44,7 @@ router.post('/', function(req, res) {
 
 // delete an article by id
 router.delete('/:id', function(req, res) {
-	Article.removeById(req.body._id, function(err) {
+	Article.findOneAndRemove({ _id: req.params.id }, function(err) {
 		if (err)
 			return handleErr(err, 'article:46')
 
