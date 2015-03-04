@@ -13,9 +13,7 @@
 	// logic
 	var articleList = this
 
-	Wiki.on('delete-article', delarticle)
-
-	function delarticle(article) {
+	Wiki.on('delete-article', function (article) {
 		$.ajax({
 			type: 'DELETE',
 			url: '/article/'+article._id
@@ -31,7 +29,29 @@
 
 			articleList.update()
 		}).error(console.error)
-	}
+	})
+
+	Wiki.on('update-article', function(article, callback) {
+		$.ajax({
+			type: 'PUT',
+			data: {
+				header: article.new.header,
+				content: article.new.content
+			},
+			url: '/article/'+article._id
+		}).done(function(newArticle) {
+			var toUpdate = opts.articles.find(function(art) {
+				return art._id == article._id
+			})
+
+			toUpdate.header = newArticle.header
+			toUpdate.content = newArticle.content
+
+			callback()
+			
+			articleList.update()
+		}).error(console.error)
+	})
 
 	new(e) {
 		$.ajax({
@@ -46,6 +66,6 @@
 
 			$('#new-article .text').val('')
 			articleList.update()
-		})
+		}).error(console.error)
 	}
 </articles>

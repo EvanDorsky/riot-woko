@@ -4,9 +4,9 @@
 		<div class="content">{ this.content }</div>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
-		<input name="header" value={ this.header }>
+		<input name="header" value={ this.header } onkeyup={ input }>
 		<br>
-		<textarea name="content" value={ this.content }/>
+		<textarea name="content" value={ this.content } onkeyup={ input }/>
 		<input type="submit">
 	</form>
 
@@ -24,26 +24,25 @@
 		article.content = opts.content
 	}
 
+	article.new = {}
+
+	input(e) {
+		article.new[e.target.name] = e.target.value
+	}
+
 	toggleEdit(e) {
+		article.new = {
+			header: article.header,
+			content: article.content
+		}
+		
 		article.editMode = !article.editMode
 	}
 
 	edit(e) {
-		$.ajax({
-			type: 'PUT',
-			data: {
-				header: $(e.target).find('[name=header]').val(),
-				content: $(e.target).find('[name=content]').val()
-			},
-			url: '/article/'+article._id
-		}).done(function(newArticle) {
-			article.header = newArticle.header
-			article.content = newArticle.content
+		Wiki.trigger('update-article', article, function() {
 			article.toggleEdit(e)
-			
-			article.new = {}
-			article.update()
-		}).error(console.error)
+		})
 	}
 
 	delete(e) {
