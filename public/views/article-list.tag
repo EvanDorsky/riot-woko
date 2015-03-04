@@ -9,7 +9,7 @@
 
 	articleList.new = {}
 
-	function byId(id) {
+	function articleBy(id) {
 		return opts.articles.find(function(art) {
 			return art._id == id
 		})
@@ -20,7 +20,7 @@
 	}
 
 	Wiki.on('delete-article-done', function(options) {
-		var toRemove = byId(options.id)
+		var toRemove = articleBy(options.id)
 
 		opts.articles.splice(opts.articles.indexOf(toRemove), 1)
 
@@ -37,7 +37,7 @@
 	})
 
 	Wiki.on('update-article-done', function(options) {
-		var toUpdate = byId(options.id)
+		var toUpdate = articleBy(options.id)
 
 		toUpdate.header = options.newArticle.header
 		toUpdate.content = options.newArticle.content

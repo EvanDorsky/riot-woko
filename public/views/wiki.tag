@@ -17,20 +17,6 @@ window.Wiki = riot.observable();
 		wiki.new[e.target.name] = e.target.value
 	}
 
-	function byId(id) {
-		return opts.articles.find(function(art) {
-			return art._id == id
-		})
-	}
-
-	riot.route(function(collection, id, action) {
-		if (!action) {// show
-			var article = byId(id)
-			console.log("article")
-			console.log(article)
-		}
-	})
-
 	new(e) {
 		$.ajax({
 			type: 'POST',
