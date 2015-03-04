@@ -1,8 +1,8 @@
 <articles>
 	<form id="new-article" onsubmit={ new }>
-		<input class="text" name="header">
+		<input class="text" name="header" onkeyup={ input }>
 		<br>
-		<textarea class="text" name="content"/>
+		<textarea class="text" name="content" onkeyup={ input }/>
 		<input type="submit" value="New Article">
 	</form>
 
@@ -12,6 +12,12 @@
 
 	// logic
 	var articleList = this
+
+	this.new = {}
+
+	input(e) {
+		this.new[e.target.name] = e.target.value
+	}
 
 	Wiki.on('delete-article', function (article) {
 		$.ajax({
@@ -34,10 +40,7 @@
 	Wiki.on('update-article', function(article, callback) {
 		$.ajax({
 			type: 'PUT',
-			data: {
-				header: article.new.header,
-				content: article.new.content
-			},
+			data: article.new,
 			url: '/article/'+article._id
 		}).done(function(newArticle) {
 			var toUpdate = opts.articles.find(function(art) {
@@ -56,10 +59,7 @@
 	new(e) {
 		$.ajax({
 			type: 'POST',
-			data: {
-				header: $(e.target).find('[name=header]').val(),
-				content: $(e.target).find('[name=content]').val()
-			},
+			data: articleList.new,
 			url: '/article'
 		}).done(function(article) {
 			opts.articles.unshift(article)
