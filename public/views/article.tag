@@ -41,15 +41,15 @@
 		}
 	})
 
-	Wiki.on('update-article-done', function(options) {
-		article.header = options.newArticle.header
-		article.content = options.newArticle.content
+	Wiki.on('put-article-done', function(newArticle) {
+		article.header = newArticle.header
+		article.content = newArticle.content
 
 		article.toggleEdit()
 		article.update()
 	})
 
-	Wiki.on('destroy-article-done', function(options) {
+	Wiki.on('delete-article-done', function(data, id) {
 		if (opts.articles)
 			riot.route('articles/'+opts.articles[0]._id)
 		else
@@ -70,13 +70,17 @@
 	}
 
 	this.edit = function(e) {
-		var that = this
-		Wiki.trigger('update-article-req', this, function() {
-			that.toggleEdit(e)
+		Wiki.trigger('article-event', {
+			type: 'put',
+			data: this.new,
+			_id: this._id
 		})
 	}
 
 	this.delete = function(e) {
-		Wiki.trigger('delete-article-req', this)
+		Wiki.trigger('article-event', {
+			type: 'delete',
+			_id: this._id
+		})
 	}
 </article>

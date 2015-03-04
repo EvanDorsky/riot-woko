@@ -19,19 +19,19 @@
 		riot.route('articles/'+e.item._id)
 	}
 
-	Wiki.on('destroy-article-done', function(options) {
-		var toRemove = articleBy(options.id)
+	Wiki.on('delete-article-done', function(data, id) {
+		var toRemove = articleBy(id)
 
 		opts.articles.splice(opts.articles.indexOf(toRemove), 1)
 
 		articleList.update()
 	})
 
-	Wiki.on('update-article-done', function(options) {
-		var toUpdate = articleBy(options.id)
+	Wiki.on('put-article-done', function(newArticle, _id) {
+		var toUpdate = articleBy(_id)
 
-		toUpdate.header = options.newArticle.header
-		toUpdate.content = options.newArticle.content
+		toUpdate.header = newArticle.header
+		toUpdate.content = newArticle.content
 		
 		articleList.update()
 	})

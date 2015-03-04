@@ -29,26 +29,17 @@ window.Wiki = riot.observable();
 			riot.update()
 		}).error(console.error)
 	}
-	
-	Wiki.on('delete-article-req', function(article) {
-		$.ajax({
-			type: 'DELETE',
-			url: '/article/'+article._id
-		}).done(function(res) {
-			Wiki.trigger('destroy-article-done', {id:article._id})
-		}).error(console.error)
-	})
 
-	Wiki.on('update-article-req', function(article) {
+	// generic model event
+	// pass the type, data
+	// fires appropriate done event, passing the response data and the id (if it exists)
+	Wiki.on('article-event', function(options) {
 		$.ajax({
-			type: 'PUT',
-			data: article.new,
-			url: '/article/'+article._id
-		}).done(function(newArticle) {
-			Wiki.trigger('update-article-done', {
-				id: article._id,
-				newArticle: newArticle
-			})
-		}).error(console.error)
+			url: '/article/'+(options._id || ''),
+			type: options.type,
+			data: options.data || {}
+		}).done(function(data) {
+			Wiki.trigger(options.type+'-article-done', data,  options._id || null)
+		})
 	})
 </wiki>
