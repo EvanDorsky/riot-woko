@@ -49,7 +49,7 @@
 		article.update()
 	})
 
-	Wiki.on('delete-article-done', function(options) {
+	Wiki.on('destroy-article-done', function(options) {
 		if (opts.articles)
 			riot.route('articles/'+opts.articles[0]._id)
 		else
