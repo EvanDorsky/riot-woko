@@ -8,20 +8,13 @@ window.Wiki = riot.observable();
 		<input type="submit" value="New Article">
 	</form>
 
-	<div id="article-list">
-		<li each={ opts.articles }>
-			<h2 onclick={ parent.showArticle }>{ header }</h2>
-			<p>{ content }<p>
-		</li>
-	</div>
-
 	// logic
-	var articleList = this
+	var wiki = this
 
-	articleList.new = {}
+	wiki.new = {}
 
 	this.input = function(e) {
-		articleList.new[e.target.name] = e.target.value
+		wiki.new[e.target.name] = e.target.value
 	}
 
 	function byId(id) {
@@ -38,54 +31,16 @@ window.Wiki = riot.observable();
 		}
 	})
 
-	this.showArticle = function(e) {
-		riot.route('articles/'+e.item._id)
-	}
-
-	Wiki.on('delete-article', function (article) {
-		$.ajax({
-			type: 'DELETE',
-			url: '/article/'+article._id
-		}).done(function(res) {
-			if (!res.success)
-				return console.error('Failure')
-
-			var toRemove = byId(article._id)
-
-			opts.articles.splice(opts.articles.indexOf(toRemove), 1)
-
-			articleList.update()
-		}).error(console.error)
-	})
-
-	Wiki.on('update-article', function(article, callback) {
-		console.log("UPDATE ARTICLE")
-		$.ajax({
-			type: 'PUT',
-			data: article.new,
-			url: '/article/'+article._id
-		}).done(function(newArticle) {
-			var toUpdate = byId(article._id)
-
-			toUpdate.header = newArticle.header
-			toUpdate.content = newArticle.content
-
-			callback()
-			
-			articleList.update()
-		}).error(console.error)
-	})
-
 	new(e) {
 		$.ajax({
 			type: 'POST',
-			data: articleList.new,
+			data: wiki.new,
 			url: '/article'
 		}).done(function(article) {
 			opts.articles.unshift(article)
 
 			$('#new-article .text').val('')
-			articleList.update()
+			riot.update()
 		}).error(console.error)
 	}
 </wiki>
