@@ -47,13 +47,6 @@
 	}
 
 	delete(e) {
-		$.ajax({
-			type: 'DELETE',
-			url: '/article/'+article._id
-		}).done(function(res) {
-			if (!res.success)
-				return console.error('Failure')
-			article.unmount()
-		}).error(console.error)
+		Wiki.trigger('delete-article', article)
 	}
 </article>

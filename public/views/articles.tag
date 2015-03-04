@@ -13,6 +13,26 @@
 	// logic
 	var articleList = this
 
+	Wiki.on('delete-article', delarticle)
+
+	function delarticle(article) {
+		$.ajax({
+			type: 'DELETE',
+			url: '/article/'+article._id
+		}).done(function(res) {
+			if (!res.success)
+				return console.error('Failure')
+
+			var toRemove = opts.articles.find(function(art) {
+				return art._id == article._id
+			})
+
+			opts.articles.splice(opts.articles.indexOf(toRemove), 1)
+
+			articleList.update()
+		}).error(console.error)
+	}
+
 	new(e) {
 		$.ajax({
 			type: 'POST',
