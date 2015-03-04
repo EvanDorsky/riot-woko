@@ -41,21 +41,6 @@
 		}
 	})
 
-	Wiki.on('put-article-done', function(newArticle) {
-		article.header = newArticle.header
-		article.content = newArticle.content
-
-		article.toggleEdit()
-		article.update()
-	})
-
-	Wiki.on('delete-article-done', function(data, id) {
-		if (opts.articles)
-			riot.route('articles/'+opts.articles[0]._id)
-		else
-			console.log("punting for now, wiki is empty")
-	})
-
 	this.input = function(e) {
 		this.new[e.target.name] = e.target.value
 	}
@@ -69,6 +54,8 @@
 		this.editMode = !this.editMode
 	}
 
+	// model event triggering and handling
+
 	this.edit = function(e) {
 		Wiki.trigger('article-event', {
 			type: 'put',
@@ -77,10 +64,25 @@
 		})
 	}
 
+	Wiki.on('put-article-done', function(newArticle) {
+		article.header = newArticle.header
+		article.content = newArticle.content
+
+		article.toggleEdit()
+		article.update()
+	})
+
 	this.delete = function(e) {
 		Wiki.trigger('article-event', {
 			type: 'delete',
 			_id: this._id
 		})
 	}
+
+	Wiki.on('delete-article-done', function(data, id) {
+		if (opts.articles)
+			riot.route('articles/'+opts.articles[0]._id)
+		else
+			console.log("punting for now, wiki is empty")
+	})
 </article>

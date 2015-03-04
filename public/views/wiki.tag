@@ -18,16 +18,10 @@ window.Wiki = riot.observable();
 	}
 
 	new(e) {
-		$.ajax({
-			type: 'POST',
-			data: wiki.new,
-			url: '/article'
-		}).done(function(article) {
-			opts.articles.unshift(article)
-
-			$('#new-article .text').val('')
-			riot.update()
-		}).error(console.error)
+		Wiki.trigger('article-event', {
+			type: 'post',
+			data: wiki.new
+		})
 	}
 
 	// generic model event
@@ -40,6 +34,6 @@ window.Wiki = riot.observable();
 			data: options.data || {}
 		}).done(function(data) {
 			Wiki.trigger(options.type+'-article-done', data,  options._id || null)
-		})
+		}).error(console.error)
 	})
 </wiki>

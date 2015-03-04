@@ -19,13 +19,7 @@
 		riot.route('articles/'+e.item._id)
 	}
 
-	Wiki.on('delete-article-done', function(data, id) {
-		var toRemove = articleBy(id)
-
-		opts.articles.splice(opts.articles.indexOf(toRemove), 1)
-
-		articleList.update()
-	})
+	// model event handling
 
 	Wiki.on('put-article-done', function(newArticle, _id) {
 		var toUpdate = articleBy(_id)
@@ -33,6 +27,21 @@
 		toUpdate.header = newArticle.header
 		toUpdate.content = newArticle.content
 		
+		articleList.update()
+	})
+
+	Wiki.on('post-article-done', function(newArticle) {
+		opts.articles.unshift(newArticle)
+
+		$('#new-article .text').val('')
+		articleList.update()
+	})
+
+	Wiki.on('delete-article-done', function(data, id) {
+		var toRemove = articleBy(id)
+
+		opts.articles.splice(opts.articles.indexOf(toRemove), 1)
+
 		articleList.update()
 	})
 </article-list>
