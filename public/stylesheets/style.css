@@ -43,15 +43,15 @@ body {
 	overflow: hidden;
 }
 
-#container {
-	position: relative;
+wiki {
+	display: -webkit-flex;
 }
 
 article-list {
-	box-sizing: border-box;
-	width: 20%;
-	position: relative;
-	display: inline-block;
+	padding: 16px;
+	-webkit-flex: 0 1 auto;
+	height: 100%;
+	overflow: scroll;
 }
 
 article-list li {
@@ -59,13 +59,9 @@ article-list li {
 }
 
 article {
-	position: fixed;
-	box-sizing: border-box;
-	width: 80%;
 	padding: 16px;
-	padding-right: 0px;
-	display: inline-block;
-	top: 3em;
+	height: 100%;
+	-webkit-flex: 0 1 auto;
 }
 
 .tweet-form {
