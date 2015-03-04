@@ -14,38 +14,35 @@
 	<button onclick={ delete }>Delete</button>
 
 	// logic
-	var article = this
-	article.editMode = false
+	this.editMode = false
 
-	// created from the new button
-	if (opts) {
-		article._id = opts._id
-		article.header = opts.header
-		article.content = opts.content
-	}
+	this._id = opts.article._id
+	this.header = opts.article.header
+	this.content = opts.article.content
 
-	article.new = {}
+	this.new = {}
 
 	this.input = function(e) {
-		article.new[e.target.name] = e.target.value
+		this.new[e.target.name] = e.target.value
 	}
 
 	this.toggleEdit = function(e) {
-		article.new = {
-			header: article.header,
-			content: article.content
+		this.new = {
+			header: this.header,
+			content: this.content
 		}
 		
-		article.editMode = !article.editMode
+		this.editMode = !this.editMode
 	}
 
 	this.edit = function(e) {
-		Wiki.trigger('update-article', article, function() {
-			article.toggleEdit(e)
+		var that = this
+		Wiki.trigger('update-article', this, function() {
+			that.toggleEdit(e)
 		})
 	}
 
 	this.delete = function(e) {
-		Wiki.trigger('delete-article', article)
+		Wiki.trigger('delete-article', this)
 	}
 </article>

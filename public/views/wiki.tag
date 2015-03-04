@@ -1,4 +1,6 @@
-<articles>
+window.Wiki = riot.observable();
+
+<wiki>
 	<form id="new-article" onsubmit={ new }>
 		<input class="text" name="header" onkeyup={ input }>
 		<br>
@@ -57,6 +59,7 @@
 	})
 
 	Wiki.on('update-article', function(article, callback) {
+		console.log("UPDATE ARTICLE")
 		$.ajax({
 			type: 'PUT',
 			data: article.new,
@@ -85,4 +88,4 @@
 			articleList.update()
 		}).error(console.error)
 	}
-</articles>
+</wiki>

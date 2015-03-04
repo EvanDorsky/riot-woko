@@ -1,17 +1,20 @@
-<h1>Woko</h1>
-
-<articles/>
+<wiki>
+	<h1>Woko</h1>
+	<article></article>
+</wiki>
 
 <!-- Includes -->
 
-<script src="/views/articles.tag" type="riot/tag"></script>
+<script src="/views/wiki.tag" type="riot/tag"></script>
 <script src="/views/article.tag" type="riot/tag"></script>
 
 <script src="//cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
-<script src="/javascripts/main.js" type="text/javascript"></script>
 
 <script>
 $.get('/article').done(function(articles) {
-	riot.mount('*', { articles: articles })
+	riot.mount('*', {
+		articles: articles,
+		article: articles[0]
+	})
 }).error(console.error)
 </script>
