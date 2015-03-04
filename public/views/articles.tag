@@ -7,16 +7,37 @@
 	</form>
 
 	<div id="article-list">
-		<article each={ opts.articles }/>
+		<li each={ opts.articles }>
+			<h2 onclick={ parent.showArticle }>{ header }</h2>
+			<p>{ content }<p>
+		</li>
 	</div>
 
 	// logic
 	var articleList = this
 
-	this.new = {}
+	articleList.new = {}
 
-	input(e) {
-		this.new[e.target.name] = e.target.value
+	this.input = function(e) {
+		articleList.new[e.target.name] = e.target.value
+	}
+
+	function byId(id) {
+		return opts.articles.find(function(art) {
+			return art._id == id
+		})
+	}
+
+	riot.route(function(collection, id, action) {
+		if (!action) {// show
+			var article = byId(id)
+			console.log("article")
+			console.log(article)
+		}
+	})
+
+	this.showArticle = function(e) {
+		riot.route('articles/'+e.item._id)
 	}
 
 	Wiki.on('delete-article', function (article) {
@@ -27,9 +48,7 @@
 			if (!res.success)
 				return console.error('Failure')
 
-			var toRemove = opts.articles.find(function(art) {
-				return art._id == article._id
-			})
+			var toRemove = byId(article._id)
 
 			opts.articles.splice(opts.articles.indexOf(toRemove), 1)
 
@@ -43,9 +62,7 @@
 			data: article.new,
 			url: '/article/'+article._id
 		}).done(function(newArticle) {
-			var toUpdate = opts.articles.find(function(art) {
-				return art._id == article._id
-			})
+			var toUpdate = byId(article._id)
 
 			toUpdate.header = newArticle.header
 			toUpdate.content = newArticle.content

@@ -26,11 +26,11 @@
 
 	article.new = {}
 
-	input(e) {
+	this.input = function(e) {
 		article.new[e.target.name] = e.target.value
 	}
 
-	toggleEdit(e) {
+	this.toggleEdit = function(e) {
 		article.new = {
 			header: article.header,
 			content: article.content
@@ -39,13 +39,13 @@
 		article.editMode = !article.editMode
 	}
 
-	edit(e) {
+	this.edit = function(e) {
 		Wiki.trigger('update-article', article, function() {
 			article.toggleEdit(e)
 		})
 	}
 
-	delete(e) {
+	this.delete = function(e) {
 		Wiki.trigger('delete-article', article)
 	}
 </article>
