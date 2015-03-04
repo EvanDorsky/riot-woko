@@ -14,6 +14,7 @@
 	<button onclick={ delete }>Delete</button>
 
 	// logic
+	var article = this
 	this.editMode = false
 
 	this._id = opts.article._id
@@ -21,6 +22,18 @@
 	this.content = opts.article.content
 
 	this.new = {}
+
+	Wiki.on('update-article-done', function(options) {
+		article.header = options.newArticle.header
+		article.content = options.newArticle.content
+
+		article.toggleEdit()
+		article.update()
+	})
+
+	Wiki.on('delete-article-done', function(options) {
+		article.unmount()
+	})
 
 	this.input = function(e) {
 		this.new[e.target.name] = e.target.value
@@ -37,12 +50,12 @@
 
 	this.edit = function(e) {
 		var that = this
-		Wiki.trigger('update-article', this, function() {
+		Wiki.trigger('update-article-req', this, function() {
 			that.toggleEdit(e)
 		})
 	}
 
 	this.delete = function(e) {
-		Wiki.trigger('delete-article', this)
+		Wiki.trigger('delete-article-req', this)
 	}
 </article>
