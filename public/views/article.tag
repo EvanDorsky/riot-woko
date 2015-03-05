@@ -4,9 +4,9 @@
 		<div class="content">{ this.content }</div>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
-		<input name="header" value={ this.header } onkeyup={ input }>
+		<input name="headerin" value={ this.header }>
 		<br>
-		<textarea name="content" value={ this.content } onkeyup={ input }/>
+		<textarea name="contentin" value={ this.content }/>
 		<input type="submit">
 	</form>
 
@@ -20,8 +20,6 @@
 	this._id = opts.article._id
 	this.header = opts.article.header
 	this.content = opts.article.content
-
-	this.new = {}
 
 	function articleBy(id) {
 		return opts.articles.find(function(art) {
@@ -41,16 +39,7 @@
 		}
 	})
 
-	this.input = function(e) {
-		this.new[e.target.name] = e.target.value
-	}
-
 	this.toggleEdit = function(e) {
-		this.new = {
-			header: this.header,
-			content: this.content
-		}
-		
 		this.editMode = !this.editMode
 	}
 
@@ -59,7 +48,10 @@
 	this.edit = function(e) {
 		Wiki.trigger('article-event', {
 			type: 'put',
-			data: this.new,
+			data: {
+				header: this.headerin.value,
+				content: this.contentin.value
+			},
 			_id: this._id
 		})
 	}

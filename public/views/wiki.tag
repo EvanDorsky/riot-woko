@@ -1,27 +1,34 @@
 window.Wiki = riot.observable();
 
 <wiki>
-	<form id="new-article" onsubmit={ new }>
-		<input class="text" name="header" onkeyup={ input }>
+	<button id="new-article" onclick={ toggleNew } if={ !newMode }>New Article</button>
+	<form if={ newMode } onsubmit={ new }>
+		<input class="text" name="header">
 		<br>
-		<textarea class="text" name="content" onkeyup={ input }/>
+		<textarea class="text" name="content"/>
 		<input type="submit" value="New Article">
 	</form>
 
 	// logic
 	var wiki = this
+	wiki.newMode = false
 
-	wiki.new = {}
+	wiki.toggleNew = function(e) {
+		wiki.newMode = !wiki.newMode
 
-	this.input = function(e) {
-		wiki.new[e.target.name] = e.target.value
+		wiki.header.value = ''
+		wiki.content.value = ''
 	}
 
-	new(e) {
+	wiki.new = function(e) {
 		Wiki.trigger('article-event', {
 			type: 'post',
-			data: wiki.new
+			data: {
+				header: wiki.header.value,
+				content: wiki.content.value
+			}
 		})
+		wiki.toggleNew(e)
 	}
 
 	// generic model event
