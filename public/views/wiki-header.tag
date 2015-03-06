@@ -1,11 +1,20 @@
 <wiki-header>
-	<button id="new-article" onclick={ toggleNew } if={ !newMode }>New Article</button>
-	<form if={ newMode } onsubmit={ new }>
-		<input class="text" name="header">
-		<br>
-		<textarea class="text" name="content"/>
-		<input type="submit" value="New Article">
-	</form>
+	<nav class="light-blue">
+		<div class="nav-wrapper container">
+			<span class="brand-logo">Olin Wiki</span>
+			<ul class="right">
+			<li>
+				<a href="#" onclick={ toggleNew }>New Article</a>
+			</li>
+			</ul>
+			<form if={ newMode } onsubmit={ new }>
+				<input class="text" name="header">
+				<br>
+				<textarea class="text" name="content"/>
+				<input type="submit" value="New Article" class="btn">
+			</form>
+		</div>
+	</nav>
 
 	// logic
 	this.newMode = false

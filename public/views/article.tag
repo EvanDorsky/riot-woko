@@ -2,16 +2,15 @@
 	<div if={ !editMode }>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
+		<button onclick={ toggleEdit } class="btn light-blue">Edit</button>
+		<button onclick={ delete } class="btn light-blue">Delete</button>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
 		<input name="headerin" value={ this.header }>
 		<br>
 		<textarea name="contentin" value={ this.content }/>
-		<input type="submit">
+		<input type="submit" class="btn light-blue">
 	</form>
-
-	<button onclick={ toggleEdit }>Edit</button>
-	<button onclick={ delete }>Delete</button>
 
 	// logic
 	var article = this
