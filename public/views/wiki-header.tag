@@ -3,7 +3,7 @@
 		<div class="nav-wrapper container">
 			<span class="brand-logo">Olin Wiki</span>
 			<ul class="right">
-			<li>
+			<li class="waves-effect">
 				<a href="#" onclick={ toggleNew }>New Article</a>
 			</li>
 			</ul>

@@ -1,15 +1,15 @@
 <article>
 	<div if={ !editMode }>
+		<button onclick={ toggleEdit } class="btn light-blue waves-effect waves-light">Edit</button>
+		<button onclick={ delete } class="btn light-blue waves-effect waves-light">Delete</button>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
-		<button onclick={ toggleEdit } class="btn light-blue">Edit</button>
-		<button onclick={ delete } class="btn light-blue">Delete</button>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
 		<input name="headerin" value={ this.header }>
 		<br>
 		<textarea name="contentin" value={ this.content }/>
-		<input type="submit" class="btn light-blue">
+		<button type="submit" class="btn light-blue waves-effect waves-light">Submit</button>
 	</form>
 
 	// logic
