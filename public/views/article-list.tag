@@ -1,6 +1,6 @@
 <article-list>
 	<li each={ opts.articles }>
-		<h2 onclick={ parent.showArticle }>{ header }</h2>
+		<h4 onclick={ parent.showArticle }>{ header }</h4>
 		<p>{ content }<p>
 	</li>
 

@@ -1,6 +1,5 @@
 <article>
 	<div if={ !editMode }>
-		<button onclick={ toggleEdit } class="btn light-blue waves-effect waves-light">Edit</button>
 		<button onclick={ delete } class="btn light-blue waves-effect waves-light">Delete</button>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
@@ -38,8 +37,13 @@
 		}
 	})
 
+	Wiki.on('toggle-edit', function() {
+		article.toggleEdit()
+	})
+
 	this.toggleEdit = function(e) {
-		this.editMode = !this.editMode
+		article.editMode = !article.editMode
+		article.update()
 	}
 
 	// model event triggering and handling
