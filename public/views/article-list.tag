@@ -33,7 +33,6 @@
 	Wiki.on('post-article-done', function(newArticle) {
 		opts.articles.unshift(newArticle)
 
-		$('#new-article .text').val('')
 		articleList.update()
 	})
 
