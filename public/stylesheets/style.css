@@ -5,7 +5,8 @@
 body {
 	font-family: 'Lora', serif;
 	font-size: 18px;
-	padding: 16px;
+	max-width: 900px;
+	margin: auto;
 }
 
 wiki-container {

@@ -6,6 +6,7 @@
 		<textarea class="text" name="content"/>
 		<input type="submit" value="New Article">
 	</form>
+	<button type="submit" onclick={ Wiki.login }>Login</button>
 
 	// logic
 	this.newMode = false
