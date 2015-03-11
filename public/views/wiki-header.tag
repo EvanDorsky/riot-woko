@@ -6,10 +6,11 @@
 		<textarea class="text" name="content"/>
 		<input type="submit" value="New Article">
 	</form>
-	<button type="submit" onclick={ Wiki.login }>Login</button>
-	<button type="submit" onclick={ Wiki.logout }>Logout</button>
+	<button if={ !opts.authed } onclick={ Wiki.login }>Login</button>
+	<button if={ opts.authed } onclick={ Wiki.logout }>Logout</button>
 
 	// logic
+	var header = this
 	this.newMode = false
 
 	this.toggleNew = function(e) {

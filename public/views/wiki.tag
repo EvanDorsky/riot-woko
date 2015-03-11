@@ -16,9 +16,11 @@ window.Wiki = riot.observable();
 
 	Wiki.login = function() {
 		window.location = '/olinauth/login'
+		Wiki.trigger('login')
 	}
 
 	Wiki.logout = function() {
 		window.location = '/olinauth/logout'
+		Wiki.trigger('logout')
 	}
 </wiki>

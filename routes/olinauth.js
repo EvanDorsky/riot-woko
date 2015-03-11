@@ -34,5 +34,5 @@ module.exports.isAuth = function(req, res, next) {
 	if (req.session.olinuser)
 		return next();
 
-	res.redirect('/');
+	res.json(null);
 }

@@ -1,5 +1,6 @@
 <article>
-	<div if={ !editMode }>
+	<p if={ !opts.authed }>Please log in to view the wiki.</p>
+	<div if={ !editMode && opts.authed }>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
 		<p>—{ this.author }</p>
@@ -11,12 +12,15 @@
 		<input type="submit">
 	</form>
 
-	<button onclick={ toggleEdit }>Edit</button>
-	<button onclick={ delete }>Delete</button>
+	<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
+	<button if={ opts.authed } onclick={ delete }>Delete</button>
 
 	// logic
 	var article = this
 	this.editMode = false
+
+	if (!opts.authed)
+		return
 
 	this._id = opts.article._id
 	this.header = opts.article.header

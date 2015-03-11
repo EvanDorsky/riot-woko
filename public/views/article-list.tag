@@ -1,9 +1,10 @@
 <article-list>
-	<li each={ opts.articles }>
-		<h2 onclick={ parent.showArticle }>{ header }</h2>
-		<p>{ content }<p>
-	</li>
-
+	<ul if={ opts.authed }>
+		<li each={ opts.articles }>
+			<h2 onclick={ parent.showArticle }>{ header }</h2>
+			<p>{ content }<p>
+		</li>
+	</ul>
 	// logic
 	var articleList = this
 
