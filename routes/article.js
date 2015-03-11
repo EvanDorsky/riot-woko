@@ -33,6 +33,7 @@ router.put('/:id', function(req, res) {
 // make a new article
 router.post('/', function(req, res) {
 	req.body.created = new Date();
+	req.body._creator = req.session.olinuser.id
 
 	new Article(req.body).save(function(err, article) {
 		if (err)
