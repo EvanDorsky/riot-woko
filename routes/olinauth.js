@@ -9,6 +9,12 @@ router.get('/login', function(req, res) {
 	res.redirect('http://www.olinapps.com/external?callback='+'http://localhost:3000/olinauth/auth');
 })
 
+router.get('/logout', function(req, res) {
+	req.session.olinuser = null;
+
+	res.redirect('/');
+})
+
 router.post('/auth', function(req, res) {
 	req.session.olinuser = {};
 
@@ -23,3 +29,10 @@ router.post('/auth', function(req, res) {
 })
 
 module.exports = router;
+
+module.exports.isAuth = function(req, res, next) {
+	if (req.session.olinuser)
+		return next();
+
+	res.redirect('/');
+}

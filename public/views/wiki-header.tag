@@ -7,6 +7,7 @@
 		<input type="submit" value="New Article">
 	</form>
 	<button type="submit" onclick={ Wiki.login }>Login</button>
+	<button type="submit" onclick={ Wiki.logout }>Logout</button>
 
 	// logic
 	this.newMode = false

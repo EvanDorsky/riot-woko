@@ -2,6 +2,7 @@
 	<div if={ !editMode }>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
+		<p>—{ this.author }</p>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
 		<input name="headerin" value={ this.header }>
@@ -20,6 +21,7 @@
 	this._id = opts.article._id
 	this.header = opts.article.header
 	this.content = opts.article.content
+	this.author = opts.article.author
 
 	function articleBy(id) {
 		return opts.articles.find(function(art) {
@@ -34,6 +36,7 @@
 			article._id = id
 			article.header = newArticle.header
 			article.content = newArticle.content
+			article.author = newArticle.author
 
 			article.update()
 		}
@@ -59,6 +62,7 @@
 	Wiki.on('put-article-done', function(newArticle) {
 		article.header = newArticle.header
 		article.content = newArticle.content
+		article.author = newArticle.author
 
 		article.toggleEdit()
 		article.update()
