@@ -1,5 +1,5 @@
 <wiki-header>
-	<button id="new-article" onclick={ toggleNew } if={ !newMode }>New Article</button>
+	<button id="new-article" onclick={ toggleNew } if={ !newMode && opts.authed }>New Article</button>
 	<form if={ newMode } onsubmit={ new }>
 		<input class="text" name="header">
 		<br>
