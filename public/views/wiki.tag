@@ -1,6 +1,8 @@
 window.Wiki = riot.observable();
 
 <wiki>
+	Wiki.newMode = false
+
 	// generic model event
 	// pass the type, data
 	// fires appropriate done event, passing the response data and the id (if it exists)

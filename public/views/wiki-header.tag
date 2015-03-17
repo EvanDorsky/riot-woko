@@ -14,10 +14,8 @@
 	this.newMode = false
 
 	this.toggleNew = function(e) {
-		this.header.value = ''
-		this.content.value = ''
-
-		this.newMode = !this.newMode
+		Wiki.newMode = !Wiki.newMode
+		Wiki.trigger('post-article-init')
 	}
 
 	this.new = function(e) {
