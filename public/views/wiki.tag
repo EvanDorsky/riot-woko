@@ -13,4 +13,14 @@ window.Wiki = riot.observable();
 			Wiki.trigger(options.type+'-article-done', data, options._id || null)
 		}).error(console.error)
 	})
+
+	Wiki.login = function() {
+		window.location = '/olinauth/login'
+		Wiki.trigger('login')
+	}
+
+	Wiki.logout = function() {
+		window.location = '/olinauth/logout'
+		Wiki.trigger('logout')
+	}
 </wiki>

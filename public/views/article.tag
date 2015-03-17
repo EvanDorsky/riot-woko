@@ -1,7 +1,9 @@
 <article>
-	<div if={ !editMode }>
+	<p if={ !opts.authed }>Please log in to view the wiki.</p>
+	<div if={ !editMode && opts.authed }>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
+		<p>—{ this.author }</p>
 	</div>
 	<form if={ editMode } onsubmit={ edit }>
 		<input name="headerin" value={ this.header }>
@@ -10,16 +12,20 @@
 		<input type="submit">
 	</form>
 
-	<button onclick={ toggleEdit }>Edit</button>
-	<button onclick={ delete }>Delete</button>
+	<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
+	<button if={ opts.authed } onclick={ delete }>Delete</button>
 
 	// logic
 	var article = this
 	this.editMode = false
 
+	if (!opts.authed)
+		return
+
 	this._id = opts.article._id
 	this.header = opts.article.header
 	this.content = opts.article.content
+	this.author = opts.article.author
 
 	function articleBy(id) {
 		return opts.articles.find(function(art) {
@@ -34,6 +40,7 @@
 			article._id = id
 			article.header = newArticle.header
 			article.content = newArticle.content
+			article.author = newArticle.author
 
 			article.update()
 		}
@@ -59,6 +66,7 @@
 	Wiki.on('put-article-done', function(newArticle) {
 		article.header = newArticle.header
 		article.content = newArticle.content
+		article.author = newArticle.author
 
 		article.toggleEdit()
 		article.update()

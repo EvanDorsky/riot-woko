@@ -5,6 +5,7 @@ var path = require('path');
 // routes
 var index = require('./routes/index');
 var article = require('./routes/article');
+var olinauth = require('./routes/olinauth');
 
 var mongoose = require('mongoose');
 var logger = require('morgan');
@@ -37,6 +38,7 @@ mongoose.connect(MONGO);
 
 // routes
 app.get('/', index.home);
-app.use('/article', article);
+app.use('/article', olinauth.isAuth, article);
+app.use('/olinauth', olinauth);
 
 app.listen(process.env.PORT || 3000);

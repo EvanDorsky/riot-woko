@@ -19,8 +19,9 @@
 <script>
 $.get('/article').done(function(articles) {
 	riot.mount('*', {
-		articles: articles,
-		article: articles[0]
+		articles: articles || null,
+		article: articles? articles[0] : null,
+		authed: articles? true : false
 	})
 }).error(console.error)
 </script>
