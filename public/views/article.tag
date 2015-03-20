@@ -12,8 +12,8 @@
 		<input type="submit">
 	</form>
 
-	<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
-	<button if={ opts.authed } onclick={ delete }>Delete</button>
+	<div class="button" if={ opts.authed } onclick={ toggleEdit }>Edit</div>
+	<div class="button" if={ opts.authed } onclick={ delete }>Delete</div>
 
 	// logic
 	var article = this

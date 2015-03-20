@@ -3,10 +3,18 @@
 }
 
 body {
-	font-family: 'Lora', serif;
+	font-family: 'Open Sans', serif;
+	font-weight: 300;
 	font-size: 18px;
 	max-width: 900px;
 	margin: auto;
+}
+
+.button {
+	display: inline-block;
+	background-color: red;
+	border: none;
+	padding: 2px;
 }
 
 wiki-container {
@@ -14,6 +22,7 @@ wiki-container {
 }
 
 wiki-header {
+	display: -webkit-flex;
 	display: block;
 	background-color: green;
 }
@@ -37,4 +46,10 @@ article {
 	display: block;
 	-webkit-flex: 1 0 auto;
 	background-color: dodgerblue;
+}
+
+article form input, textarea {
+	background-color: red;
+	font-size: 18px;
+	font-family: 'Open Sans', serif;
 }
