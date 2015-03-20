@@ -1,55 +1,48 @@
 * {
-	margin: 0;
+  margin: 0;
 }
-
 body {
-	font-family: 'Open Sans', serif;
-	font-weight: 300;
-	font-size: 18px;
-	max-width: 900px;
-	margin: auto;
+  font-family: 'Open Sans', serif;
+  font-weight: 300;
+  font-size: 18px;
+  max-width: 900px;
+  margin: auto;
 }
-
 .button {
-	display: inline-block;
-	background-color: red;
-	border: none;
-	padding: 2px;
+  display: inline-block;
+  background-color: #f00;
+  border: none;
+  padding: 2px;
 }
-
 wiki-container {
-	display: -webkit-flex;
+  display: -webkit-flex;
 }
-
 wiki-header {
-	display: -webkit-flex;
-	display: block;
-	background-color: green;
+  display: -webkit-flex;
+  display: block;
+  background-color: #008000;
 }
-
 article-list {
-	padding: 16px;
-	/* arguments: grow shrink basis */
-	-webkit-flex: 0 1 200px;
-	height: 100%;
-	overflow: scroll;
-	display: block;
-	background-color: gray;
+  padding: 16px;
+/* arguments grow shrink basis */
+  -webkit-flex: 0 1 200px;
+  height: 100%;
+  overflow: scroll;
+  display: block;
+  background-color: #808080;
 }
-
 article-list li {
-	list-style-type: none;
+  list-style-type: none;
 }
-
 article {
-	padding: 16px;
-	display: block;
-	-webkit-flex: 1 0 auto;
-	background-color: dodgerblue;
+  padding: 16px;
+  display: block;
+  -webkit-flex: 1 0 auto;
+  background-color: #1e90ff;
 }
-
-article form input, textarea {
-	background-color: red;
-	font-size: 18px;
-	font-family: 'Open Sans', serif;
+article form input,
+article textarea {
+  background-color: #f00;
+  font-size: 18px;
+  font-family: 'Open Sans', serif;
 }
