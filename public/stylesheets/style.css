@@ -8,7 +8,10 @@ body {
   max-width: 900px;
   margin: auto;
 }
-.button {
+button {
+  font-family: 'Open Sans', serif;
+  font-weight: 300;
+  font-size: 18px;
   display: inline-block;
   background-color: #f00;
   border: none;

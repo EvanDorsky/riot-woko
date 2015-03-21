@@ -9,13 +9,13 @@
 		<input name="headerin">
 		<br>
 		<textarea name="contentin"/>
-		<div class="button" onclick={ submit }>Submit</div>
-		<div class="button" onclick={ cancel }>Cancel</div>
+		<button onclick={ submit }>Submit</button>
+		<button onclick={ cancel }>Cancel</button>
 	</form>
 
 	<div class="edit-buttons" if={ !editMode && !Wiki.newMode }>
-		<div class="button" if={ opts.authed } onclick={ toggleEdit }>Edit</div>
-		<div class="button" if={ opts.authed } onclick={ delete }>Delete</div>
+		<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
+		<button if={ opts.authed } onclick={ delete }>Delete</button>
 	</div>
 
 	// logic

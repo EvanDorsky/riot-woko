@@ -1,7 +1,7 @@
 <wiki-header>
-	<div class="button" id="new-article" onclick={ toggleNew } if={ !newMode && opts.authed }>New Article</div>
-	<div class="button" if={ !opts.authed } onclick={ Wiki.login }>Login</div>
-	<div class="button" if={ opts.authed } onclick={ Wiki.logout }>Logout</div>
+	<button id="new-article" onclick={ toggleNew } if={ !newMode && opts.authed }>New Article</button>
+	<button if={ !opts.authed } onclick={ Wiki.login }>Login</button>
+	<button if={ opts.authed } onclick={ Wiki.logout }>Logout</button>
 
 	// logic
 	var header = this
