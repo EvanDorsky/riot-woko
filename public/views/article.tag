@@ -9,8 +9,8 @@
 		<input name="headerin">
 		<br>
 		<textarea name="contentin"/>
-		<button onclick={ submit }>Submit</button>
-		<button onclick={ cancel }>Cancel</button>
+		<div class="button" onclick={ submit }>Submit</div>
+		<div class="button" onclick={ cancel }>Cancel</div>
 	</form>
 
 	<div class="edit-buttons" if={ !editMode && !Wiki.newMode }>
