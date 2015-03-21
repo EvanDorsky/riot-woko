@@ -2,7 +2,7 @@
 	<ul if={ opts.authed }>
 		<li each={ opts.articles }>
 			<h2 onclick={ parent.showArticle }>{ header }</h2>
-			<p>{ content }<p>
+			<raw content={ content }/>
 		</li>
 	</ul>
 	// logic
@@ -26,6 +26,7 @@
 		var toUpdate = articleBy(_id)
 
 		toUpdate.header = newArticle.header
+		toUpdate.source = newArticle.source
 		toUpdate.content = newArticle.content
 		
 		articleList.update()

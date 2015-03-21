@@ -2,13 +2,13 @@
 	<p if={ !opts.authed }>Please log in to view the wiki.</p>
 	<div if={ (!editMode && !Wiki.newMode ) && opts.authed }>
 		<h2>{ this.header }</h2>
-		<div class="content">{ this.content }</div>
+		<raw class="content" content={ this.content }/>
 		<p>—{ this.author }</p>
 	</div>
 	<form if={ editMode || Wiki.newMode }>
 		<input name="headerin">
 		<br>
-		<textarea name="contentin"/>
+		<textarea name="sourcein"/>
 		<button onclick={ submit }>Submit</button>
 		<button onclick={ cancel }>Cancel</button>
 	</form>
@@ -28,6 +28,7 @@
 	this._id = opts.article._id
 	this.header = opts.article.header
 	this.content = opts.article.content
+	this.source = opts.article.source
 	this.author = opts.article.author
 
 	function articleBy(id) {
@@ -51,7 +52,7 @@
 
 	this.toggleEdit = function(e) {
 		this.headerin.value = this.header
-		this.contentin.value = this.content
+		this.sourcein.value = this.source
 
 		this.editMode = !this.editMode
 	}
@@ -68,7 +69,7 @@
 
 	Wiki.on('post-article-init', function() {
 		article.headerin.value = ''
-		article.contentin.value = ''
+		article.sourcein.value = ''
 
 		article.update()
 	})
@@ -79,11 +80,14 @@
 	})
 
 	this.submit = function(e) {
+		var parsed = marked(this.sourcein.value)
+
 		Wiki.trigger('article-event', {
 			type: Wiki.newMode? 'post' : 'put',
 			data: {
 				header: this.headerin.value,
-				content: this.contentin.value
+				source: this.sourcein.value,
+				content: parsed
 			},
 			_id: Wiki.newMode? null : this._id
 		})
@@ -92,10 +96,15 @@
 	Wiki.on('put-article-done', function(newArticle) {
 		article.header = newArticle.header
 		article.content = newArticle.content
+		article.source = newArticle.source
 		article.author = newArticle.author
+
+		console.log("article")
+		console.log(article)
 
 		article.toggleEdit()
 		article.update()
+		riot.update()
 	})
 
 	this.delete = function(e) {
