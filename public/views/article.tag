@@ -61,6 +61,7 @@
 			return article.toggleEdit()
 		else
 			Wiki.newMode = !Wiki.newMode
+		riot.update()
 	}
 
 	// model event triggering and handling
