@@ -5,15 +5,18 @@
 		<div class="content">{ this.content }</div>
 		<p>—{ this.author }</p>
 	</div>
-	<form if={ editMode || Wiki.newMode } onsubmit={ submit }>
+	<form if={ editMode || Wiki.newMode }>
 		<input name="headerin">
 		<br>
 		<textarea name="contentin"/>
-		<input type="submit">
+		<button onclick={ submit }>Submit</button>
+		<button onclick={ cancel }>Cancel</button>
 	</form>
 
-	<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
-	<button if={ opts.authed } onclick={ delete }>Delete</button>
+	<div class="edit-buttons" if={ !editMode && !Wiki.newMode }>
+		<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
+		<button if={ opts.authed } onclick={ delete }>Delete</button>
+	</div>
 
 	// logic
 	var article = this
@@ -51,6 +54,13 @@
 		this.contentin.value = this.content
 
 		this.editMode = !this.editMode
+	}
+
+	this.cancel = function(e) {
+		if (!Wiki.newMode)
+			return article.toggleEdit()
+		else
+			Wiki.newMode = !Wiki.newMode
 	}
 
 	// model event triggering and handling
