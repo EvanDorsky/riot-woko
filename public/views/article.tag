@@ -99,9 +99,6 @@
 		article.source = newArticle.source
 		article.author = newArticle.author
 
-		console.log("article")
-		console.log(article)
-
 		article.toggleEdit()
 		article.update()
 		riot.update()
