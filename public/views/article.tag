@@ -1,19 +1,22 @@
 <article>
 	<p if={ !opts.authed }>Please log in to view the wiki.</p>
-	<div if={ !editMode && opts.authed }>
+	<div if={ (!editMode && !Wiki.newMode ) && opts.authed }>
 		<h2>{ this.header }</h2>
 		<div class="content">{ this.content }</div>
 		<p>—{ this.author }</p>
 	</div>
-	<form if={ editMode } onsubmit={ edit }>
-		<input name="headerin" value={ this.header }>
+	<form if={ editMode || Wiki.newMode }>
+		<input name="headerin">
 		<br>
-		<textarea name="contentin" value={ this.content }/>
-		<input type="submit">
+		<textarea name="contentin"/>
+		<button onclick={ submit }>Submit</button>
+		<button onclick={ cancel }>Cancel</button>
 	</form>
 
-	<div class="button" if={ opts.authed } onclick={ toggleEdit }>Edit</div>
-	<div class="button" if={ opts.authed } onclick={ delete }>Delete</div>
+	<div class="edit-buttons" if={ !editMode && !Wiki.newMode }>
+		<button if={ opts.authed } onclick={ toggleEdit }>Edit</button>
+		<button if={ opts.authed } onclick={ delete }>Delete</button>
+	</div>
 
 	// logic
 	var article = this
@@ -47,19 +50,42 @@
 	})
 
 	this.toggleEdit = function(e) {
+		this.headerin.value = this.header
+		this.contentin.value = this.content
+
 		this.editMode = !this.editMode
+	}
+
+	this.cancel = function(e) {
+		if (!Wiki.newMode)
+			return article.toggleEdit()
+		else
+			Wiki.newMode = !Wiki.newMode
+		riot.update()
 	}
 
 	// model event triggering and handling
 
-	this.edit = function(e) {
+	Wiki.on('post-article-init', function() {
+		article.headerin.value = ''
+		article.contentin.value = ''
+
+		article.update()
+	})
+
+	Wiki.on('post-article-done', function(newArticle) {
+		Wiki.newMode = !Wiki.newMode
+		article.update()
+	})
+
+	this.submit = function(e) {
 		Wiki.trigger('article-event', {
-			type: 'put',
+			type: Wiki.newMode? 'post' : 'put',
 			data: {
 				header: this.headerin.value,
 				content: this.contentin.value
 			},
-			_id: this._id
+			_id: Wiki.newMode? null : this._id
 		})
 	}
 
