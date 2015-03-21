@@ -1,12 +1,14 @@
-font-size = 18px
-
 doc-font()
 	font-family 'Open Sans', serif
 	font-weight 300
-	font-size font-size
+	font-size 18px
 
 *
 	margin 0
+	padding 0
+	
+h1, h2, h3, h4, h5, h6
+	font-weight 300
 
 body
 	doc-font()
@@ -15,6 +17,7 @@ body
 
 button
 	doc-font()
+	cursor pointer
 	display inline-block
 	background-color rgba(white, 20%)
 	border none
@@ -50,6 +53,6 @@ article
 	background-color dodgerblue
 
 	form input, textarea
-		background-color red
-		font-size 18px
-		font-family 'Open Sans', serif
+		doc-font()
+		background-color rgba(white, 20%)
+		border none
