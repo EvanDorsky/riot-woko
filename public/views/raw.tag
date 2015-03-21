@@ -1,5 +1,6 @@
 <raw>
-	<span></span>
-
-	this.root.innerHTML = opts.content
+	// seems like a hack
+	this.on('update', function() {
+		this.root.innerHTML = opts.content
+	})
 </raw>
