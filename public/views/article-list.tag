@@ -1,8 +1,8 @@
 <article-list>
 	<ul if={ opts.authed }>
 		<li each={ opts.articles }>
-			<h2 onclick={ parent.showArticle }>{ header }</h2>
-			<raw content={ content }/>
+			<h2 class="art-head" onclick={ parent.showArticle }>{ header }</h2>
+			<p>{ content }<p>
 		</li>
 	</ul>
 	// logic
