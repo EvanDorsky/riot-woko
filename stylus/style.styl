@@ -10,52 +10,54 @@ doc-font()
 h1, h2, h3, h4, h5, h6
 	font-weight 300
 
+html
+	height 100%
+
 body
 	doc-font()
 	max-width 900px
 	margin auto
+	min-height 100%
 
 button
 	doc-font()
 	cursor pointer
 	display inline-block
-	background-color rgba(white, 20%)
+	background-color #fffa
 	border none
 	padding 2px
 	
 	&:hover
-		background-color rgba(white, 40%)
+		background-color #fffa
 
-wiki-container
+wiki
 	display -webkit-flex
+	-webkit-flex-flow row wrap
+	min-height 100%
 
 wiki-header
-	display -webkit-flex
 	display block
-	background-color green
+	-webkit-flex 1 100%
 
 article-list
 	padding 16px
 	/* arguments grow shrink basis */
 	-webkit-flex 0 1 200px
+
 	height 100%
 	overflow scroll
 	display block
-	background-color gray
+	background-color #efefef
 
-article-list li
-	list-style-type none
+	li
+		list-style-type none
 
 article
 	padding 16px
 	display block
 	-webkit-flex 1 0 auto
-	background-color dodgerblue
 
 	form input, textarea
 		doc-font()
-		background-color rgba(white, 20%)
+		background-color #fffa
 		border none
-
-.art-head
-	color white
