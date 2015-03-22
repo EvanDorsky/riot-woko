@@ -2,7 +2,7 @@
 	<ul if={ opts.authed }>
 		<li each={ opts.articles }>
 			<h2 class="art-head" onclick={ parent.showArticle }>{ header }</h2>
-			<p>{ content }<p>
+			<raw content={ content }/>
 		</li>
 	</ul>
 	// logic
