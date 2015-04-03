@@ -11,14 +11,12 @@ h6 {
   font-weight: 300;
 }
 html {
-  height: 100%;
+  min-height: 100%;
 }
 body {
   font-family: 'Open Sans', serif;
   font-weight: 300;
   font-size: 18px;
-  max-width: 900px;
-  margin: auto;
   min-height: 100%;
 }
 button {
@@ -27,36 +25,77 @@ button {
   font-size: 18px;
   cursor: pointer;
   display: inline-block;
-  background-color: rgba(255,255,255,0.667);
   border: none;
-  padding: 2px;
-}
-button:hover {
-  background-color: rgba(255,255,255,0.667);
+  background-color: rgba(170,170,170,0.667);
+  padding: 6px;
 }
 wiki {
   display: -webkit-flex;
   -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  -o-flex-flow: row wrap;
+  flex-flow: row wrap;
   min-height: 100%;
 }
 wiki-header {
+  display: -webkit-flex;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  -o-flex-flow: row wrap;
+  flex-flow: row wrap;
+  background-color: #49f;
+  z-index: 3;
   -webkit-flex: 1 100%;
+  -moz-flex: 1 100%;
+  -ms-flex: 1 100%;
+  -o-flex: 1 100%;
+  flex: 1 100%;
+}
+wiki-header button {
+  -webkit-flex: 0 0 1;
+  -moz-flex: 0 0 1;
+  -ms-flex: 0 0 1;
+  -o-flex: 0 0 1;
+  flex: 0 0 1;
+  color: #fff;
+  background-color: rgba(255,255,255,0);
+}
+wiki-header button:hover {
+  background-color: rgba(255,255,255,0.2);
 }
 article-list {
+  z-index: 1;
+  background-color: #fefefe;
+  border-right: 20px;
+  -webkit-border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
+  -moz-border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
+  -ms-border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
+  -o-border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
+  border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
   padding: 16px;
   -webkit-flex: 0 1 200px;
+  -moz-flex: 0 1 200px;
+  -ms-flex: 0 1 200px;
+  -o-flex: 0 1 200px;
+  flex: 0 1 200px;
   height: 100%;
   overflow: scroll;
   display: block;
-  background-color: #efefef;
 }
 article-list li {
   list-style-type: none;
 }
 article {
+  z-index: 2;
   padding: 16px;
   display: block;
   -webkit-flex: 1 0 auto;
+  -moz-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  -o-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 article form input,
 article textarea {
