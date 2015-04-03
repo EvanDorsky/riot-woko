@@ -40,12 +40,10 @@ wiki {
   min-height: 100%;
 }
 wiki-header {
-  display: block;
   -webkit-flex: 1 100%;
 }
 article-list {
   padding: 16px;
-/* arguments grow shrink basis */
   -webkit-flex: 0 1 200px;
   height: 100%;
   overflow: scroll;
