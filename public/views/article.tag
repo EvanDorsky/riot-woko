@@ -45,10 +45,9 @@
 
 	this.cancel = function(e) {
 		if (!Wiki.newMode)
-			return article.toggleEdit()
+			Wiki.trigger('toggle-edit')
 		else
-			Wiki.newMode = !Wiki.newMode
-		riot.update()
+			Wiki.trigger('toggle-new')
 	}
 
   this.submit = function(e) {
@@ -65,6 +64,8 @@
     })
   }
 
+	// model event triggering and handling
+
   Wiki.on('toggle-edit', function() {
     article.headerin.value = article.header
     article.sourcein.value = article.source
@@ -72,7 +73,14 @@
     article.update()
   })
 
-	// model event triggering and handling
+  Wiki.on('put-article-done', function(newArticle) {
+    article.header = newArticle.header
+    article.content = newArticle.content
+    article.source = newArticle.source
+    article.author = newArticle.author
+
+    Wiki.trigger('toggle-edit')
+  })
 
 	Wiki.on('post-article-init', function() {
 		article.headerin.value = ''
@@ -81,26 +89,15 @@
 		article.update()
 	})
 
+  Wiki.on('post-article-done', function(newArticle) {
+    Wiki.trigger('toggle-new')
+  })
+
   Wiki.on('delete-article-init', function() {
     Wiki.trigger('article-event', {
       type: 'delete',
       _id: article._id
     })
-  })
-
-	Wiki.on('put-article-done', function(newArticle) {
-		article.header = newArticle.header
-		article.content = newArticle.content
-		article.source = newArticle.source
-		article.author = newArticle.author
-
-		Wiki.trigger('toggle-edit')
-		riot.update()
-	})
-
-  Wiki.on('post-article-done', function(newArticle) {
-    Wiki.newMode = !Wiki.newMode
-    article.update()
   })
 
 	Wiki.on('delete-article-done', function(data, id) {

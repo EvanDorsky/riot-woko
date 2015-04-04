@@ -13,7 +13,7 @@
   }
 
 	this.toggleNew = function(e) {
-		Wiki.newMode = !Wiki.newMode
+    Wiki.trigger('toggle-new')
 		Wiki.trigger('post-article-init')
 	}
 

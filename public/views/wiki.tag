@@ -19,6 +19,12 @@ window.Wiki = riot.observable();
 
   Wiki.on('toggle-edit', function() {
     Wiki.editMode = !Wiki.editMode
+    riot.update()
+  })
+
+  Wiki.on('toggle-new', function() {
+    Wiki.newMode = !Wiki.newMode
+    riot.update()
   })
 
 	Wiki.login = function() {
