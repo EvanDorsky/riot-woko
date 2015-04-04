@@ -8,8 +8,6 @@
 	<form if={ Wiki.editMode || Wiki.newMode }>
 		<input name="headerin">
 		<textarea name="sourcein"/>
-		<button onclick={ submit }>Submit</button>
-		<button onclick={ cancel }>Cancel</button>
 	</form>
 
 	// logic
@@ -43,26 +41,19 @@
 		}
 	})
 
-	this.cancel = function(e) {
-		if (!Wiki.newMode)
-			Wiki.trigger('toggle-edit')
-		else
-			Wiki.trigger('toggle-new')
-	}
-
-  this.submit = function(e) {
-    var parsed = marked(this.sourcein.value)
+  Wiki.on('article-submit', function() {
+    var parsed = marked(article.sourcein.value)
 
     Wiki.trigger('article-event', {
       type: Wiki.newMode? 'post' : 'put',
       data: {
-        header: this.headerin.value,
-        source: this.sourcein.value,
+        header: article.headerin.value,
+        source: article.sourcein.value,
         content: parsed
       },
-      _id: Wiki.newMode? null : this._id
+      _id: Wiki.newMode? null : article._id
     })
-  }
+  })
 
 	// model event triggering and handling
 

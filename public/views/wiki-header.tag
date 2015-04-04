@@ -4,9 +4,22 @@
 	<button if={ opts.authed } onclick={ Wiki.logout }>Logout</button>
   <button if={ opts.authed && (!Wiki.editMode && !Wiki.newMode) } onclick={ toggleEdit }>Edit</button>
   <button if={ opts.authed && (!Wiki.editMode && !Wiki.newMode) } onclick={ delete }>Delete</button>
+  <button if={ Wiki.editMode || Wiki.newMode } onclick={ submit }>Submit</button>
+  <button if={ Wiki.editMode || Wiki.newMode } onclick={ cancel }>Cancel</button>
 
 	// logic
 	var header = this
+
+  this.cancel = function(e) {
+    if (!Wiki.newMode)
+      Wiki.trigger('toggle-edit')
+    else
+      Wiki.trigger('toggle-new')
+  }
+
+  this.submit = function(e) {
+    Wiki.trigger('article-submit')
+  }
 
   this.toggleEdit = function(e) {
     Wiki.trigger('toggle-edit')
