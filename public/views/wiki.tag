@@ -2,6 +2,7 @@ window.Wiki = riot.observable();
 
 <wiki>
 	Wiki.newMode = false
+  Wiki.editMode = false
 
 	// generic model event
 	// pass the type, data
@@ -15,6 +16,10 @@ window.Wiki = riot.observable();
 			Wiki.trigger(options.type+'-article-done', data, options._id || null)
 		}).error(console.error)
 	})
+
+  Wiki.on('toggle-edit', function() {
+    Wiki.editMode = !Wiki.editMode
+  })
 
 	Wiki.login = function() {
 		window.location = '/olinauth/login'
