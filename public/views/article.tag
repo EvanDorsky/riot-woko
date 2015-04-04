@@ -7,7 +7,6 @@
 	</div>
 	<form if={ Wiki.editMode || Wiki.newMode }>
 		<input name="headerin">
-		<br>
 		<textarea name="sourcein"/>
 		<button onclick={ submit }>Submit</button>
 		<button onclick={ cancel }>Cancel</button>

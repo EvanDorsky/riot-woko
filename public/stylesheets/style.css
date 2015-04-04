@@ -10,14 +10,14 @@ h5,
 h6 {
   font-weight: 300;
 }
-html {
-  min-height: 100%;
+html,
+body {
+  height: 100%;
 }
 body {
   font-family: 'Open Sans', serif;
   font-weight: 300;
   font-size: 18px;
-  min-height: 100%;
 }
 button {
   font-family: 'Open Sans', serif;
@@ -29,16 +29,27 @@ button {
   background-color: rgba(170,170,170,0.667);
   padding: 6px;
 }
-wiki {
+wiki-flex {
   display: -webkit-flex;
   -webkit-flex-flow: row wrap;
   -moz-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   -o-flex-flow: row wrap;
   flex-flow: row wrap;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  min-height: 100%;
+}
+wiki {
   min-height: 100%;
 }
 wiki-header {
+  z-index: 3;
+  width: 100%;
+  height: 2em;
   display: -webkit-flex;
   -webkit-flex-flow: row wrap;
   -moz-flex-flow: row wrap;
@@ -46,12 +57,6 @@ wiki-header {
   -o-flex-flow: row wrap;
   flex-flow: row wrap;
   background-color: #49f;
-  z-index: 3;
-  -webkit-flex: 1 100%;
-  -moz-flex: 1 100%;
-  -ms-flex: 1 100%;
-  -o-flex: 1 100%;
-  flex: 1 100%;
 }
 wiki-header button {
   -webkit-flex: 0 0 1;
@@ -67,6 +72,11 @@ wiki-header button:hover {
 }
 article-list {
   z-index: 1;
+  -webkit-flex: 0 200px;
+  -moz-flex: 0 200px;
+  -ms-flex: 0 200px;
+  -o-flex: 0 200px;
+  flex: 0 200px;
   background-color: #fefefe;
   border-right: 20px;
   -webkit-border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
@@ -75,33 +85,59 @@ article-list {
   -o-border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
   border-image: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(170,170,170,0.333)) 1 100%;
   padding: 16px;
-  -webkit-flex: 0 1 200px;
-  -moz-flex: 0 1 200px;
-  -ms-flex: 0 1 200px;
-  -o-flex: 0 1 200px;
-  flex: 0 1 200px;
-  height: 100%;
   overflow: scroll;
-  display: block;
 }
 article-list li {
   list-style-type: none;
 }
 article {
+  display: -webkit-flex;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
   z-index: 2;
   padding: 16px;
-  display: block;
-  -webkit-flex: 1 0 auto;
-  -moz-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
-  -o-flex: 1 0 auto;
-  flex: 1 0 auto;
+  -webkit-flex: 1 0;
+  -moz-flex: 1 0;
+  -ms-flex: 1 0;
+  -o-flex: 1 0;
+  flex: 1 0;
+}
+article form {
+  -webkit-flex: 1 auto;
+  -moz-flex: 1 auto;
+  -ms-flex: 1 auto;
+  -o-flex: 1 auto;
+  flex: 1 auto;
+  display: -webkit-flex;
+  -webkit-flex-flow: column wrap;
+  -moz-flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  -o-flex-flow: column wrap;
+  flex-flow: column wrap;
+  min-height: 100%;
 }
 article form input,
-article textarea {
+article form textarea {
   font-family: 'Open Sans', serif;
   font-weight: 300;
   font-size: 18px;
   background-color: rgba(255,255,255,0.667);
   border: none;
+}
+article form input {
+  -webkit-flex: 0 36px;
+  -moz-flex: 0 36px;
+  -ms-flex: 0 36px;
+  -o-flex: 0 36px;
+  flex: 0 36px;
+}
+article form textarea {
+  -webkit-flex: 1 0;
+  -moz-flex: 1 0;
+  -ms-flex: 1 0;
+  -o-flex: 1 0;
+  flex: 1 0;
 }
