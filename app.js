@@ -39,6 +39,7 @@ mongoose.connect(MONGO);
 // routes
 app.get('/', index.home);
 app.use('/article', olinauth.isAuth, article);
+app.use('/category', olinauth.isAuth, article);
 app.use('/olinauth', olinauth);
 
 app.listen(process.env.PORT || 3000);

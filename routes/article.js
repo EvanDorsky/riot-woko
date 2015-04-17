@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var Article = require('../models/article');
 var handleErr = require('../utils/utils').handleErr;
-// var isAuth = require('../routes/olinauth/')
 
 var router = express.Router();
 
@@ -27,7 +26,7 @@ router.put('/:id', function(req, res) {
 	
 	Article.update({ _id: req.params.id }, req.body, function(err) {
 		if (err)
-			return handleErr(err, 'article:27');
+			return handleErr(err, 'article:29');
 
 		res.json(req.body);
 	})
@@ -40,7 +39,7 @@ router.post('/', function(req, res) {
 
 	new Article(req.body).save(function(err, article) {
 		if (err)
-			return handleErr(err, 'article:33');
+			return handleErr(err, 'article:42');
 
 		res.json(article);
 	});
@@ -50,7 +49,7 @@ router.post('/', function(req, res) {
 router.delete('/:id', function(req, res) {
 	Article.findOneAndRemove({ _id: req.params.id }, function(err) {
 		if (err)
-			return handleErr(err, 'article:46')
+			return handleErr(err, 'article:52')
 
 		res.json({ success: true });
 	})

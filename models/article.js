@@ -6,5 +6,6 @@ module.exports = mongoose.model('Article', new Schema({
 	title: String,
 	source: String,
 	content: String,
+  category: { type: Schema.Types.ObjectId, ref: 'Category' },
 	created: Date
 }));
