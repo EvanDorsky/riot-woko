@@ -38,7 +38,7 @@
 		Wiki.trigger('article-event', {
 			type: 'post',
 			data: {
-				header: this.header.value,
+				title: this.title.value,
 				content: this.content.value
 			}
 		})

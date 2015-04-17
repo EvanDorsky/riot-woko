@@ -1,12 +1,12 @@
 <article>
 	<p if={ !opts.authed }>Please log in to view the wiki.</p>
 	<div if={ (!Wiki.editMode && !Wiki.newMode ) && opts.authed }>
-		<h2>{ this.header }</h2>
+		<h2>{ this.title }</h2>
 		<raw class="content" content={ this.content }/>
 		<p>—{ this.author }</p>
 	</div>
 	<form if={ Wiki.editMode || Wiki.newMode }>
-		<input name="headerin">
+		<input name="titlein">
 		<textarea name="sourcein"/>
 	</form>
 
@@ -17,7 +17,7 @@
 		return
 
 	this._id = opts.article._id
-	this.header = opts.article.header
+	this.title = opts.article.title
 	this.content = opts.article.content
 	this.source = opts.article.source
 	this.author = opts.article.author
@@ -33,7 +33,7 @@
 			var newArticle = articleBy(id)
 
 			article._id = id
-			article.header = newArticle.header
+			article.title = newArticle.title
 			article.content = newArticle.content
 			article.author = newArticle.author
 
@@ -47,7 +47,7 @@
     Wiki.trigger('article-event', {
       type: Wiki.newMode? 'post' : 'put',
       data: {
-        header: article.headerin.value,
+        title: article.titlein.value,
         source: article.sourcein.value,
         content: parsed
       },
@@ -58,14 +58,14 @@
 	// model event triggering and handling
 
   Wiki.on('toggle-edit', function() {
-    article.headerin.value = article.header
+    article.titlein.value = article.title
     article.sourcein.value = article.source
 
     article.update()
   })
 
   Wiki.on('put-article-done', function(newArticle) {
-    article.header = newArticle.header
+    article.title = newArticle.title
     article.content = newArticle.content
     article.source = newArticle.source
     article.author = newArticle.author
@@ -74,7 +74,7 @@
   })
 
 	Wiki.on('post-article-init', function() {
-		article.headerin.value = ''
+		article.titlein.value = ''
 		article.sourcein.value = ''
 
 		article.update()

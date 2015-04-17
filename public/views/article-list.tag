@@ -1,7 +1,7 @@
 <article-list>
 	<ul if={ opts.authed }>
 		<li each={ opts.articles }>
-			<h2 onclick={ parent.showArticle }>{ header }</h2>
+			<h2 onclick={ parent.showArticle }>{ title }</h2>
 			<raw content={ content }/>
 		</li>
 	</ul>
@@ -25,7 +25,7 @@
 	Wiki.on('put-article-done', function(newArticle, _id) {
 		var toUpdate = articleBy(_id)
 
-		toUpdate.header = newArticle.header
+		toUpdate.title = newArticle.title
 		toUpdate.source = newArticle.source
 		toUpdate.content = newArticle.content
 		

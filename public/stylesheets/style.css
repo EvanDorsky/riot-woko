@@ -49,7 +49,6 @@ wiki {
 wiki-header {
   z-index: 3;
   width: 100%;
-  height: 2em;
   display: -webkit-flex;
   -webkit-flex-flow: row wrap;
   -moz-flex-flow: row wrap;
